@@ -35,6 +35,18 @@ def create_image_data(colors):
         result[index] = chr(r) + chr(g) + chr(b)
     return ''.join(result)
 
+def rgb_int(colors):
+    return [(r << 16) | (g << 8) | (b) for r, g, b in colors]
+
+def int_rgb(colors):
+    result = []
+    for color in colors:
+        r = 0xff & (color >> 16)
+        g = 0xff & (color >> 8)
+        b = 0xff & (color >> 0)
+        result.append((r, g, b))
+    return result
+
 def main(path):
     app = wx.App()
     print 'loading target image'

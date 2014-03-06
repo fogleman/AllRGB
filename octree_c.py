@@ -25,6 +25,14 @@ def dll_pop(tree, r, g, b):
     dll.pop(tree, byref(r), byref(g), byref(b))
     return (r.value, g.value, b.value)
 
+dll.apply.restype = None
+dll.apply.argtypes = [POINTER(c_int), POINTER(c_int)]
+def dll_apply(colors, indexes):
+    colors = (c_int * len(colors))(*colors)
+    indexes = (c_int * len(indexes))(*indexes)
+    dll.apply(colors, indexes)
+    return list(colors)
+
 class Octree(object):
     def __init__(self):
         self.tree = dll_allocate()

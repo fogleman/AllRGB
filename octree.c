@@ -80,3 +80,18 @@ void pop(int *tree, int *r, int *g, int *b) {
     *g = pg;
     *b = pb;
 }
+
+void apply(int *colors, int *indexes) {
+    int *tree = allocate();
+    initialize(tree);
+    for (int i = 0; i < COLORS; i++) {
+        int index = indexes[i];
+        int color = colors[index];
+        int r = 0xff & (color >> 16);
+        int g = 0xff & (color >> 8);
+        int b = 0xff & (color >> 0);
+        pop(tree, &r, &g, &b);
+        colors[index] = (r << 16) | (g << 8) | (b);
+    }
+    deallocate(tree);
+}
