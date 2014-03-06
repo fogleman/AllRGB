@@ -15,4 +15,7 @@ def verify(path):
     print 'Valid!'
 
 if __name__ == '__main__':
-    verify(sys.argv[1])
+    if len(sys.argv) != 2:
+        print 'Usage: python verify.py input.png'
+    else:
+        verify(sys.argv[1])

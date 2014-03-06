@@ -25,8 +25,8 @@ def load_indexes():
         x, y = x + random.random() * 512 - 256, y + random.random() * 512 - 256
         return x * x + y * y
     indexes = range(SIZE * SIZE)
-    random.shuffle(indexes)
-    # indexes = sorted(indexes, key=index_func)
+    # random.shuffle(indexes)
+    indexes = sorted(indexes, key=index_func)
     return indexes
 
 def create_image_data(colors):
@@ -59,4 +59,5 @@ def main(path):
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print 'Usage: python main.py input.png'
-    main(sys.argv[1])
+    else:
+        main(sys.argv[1])
