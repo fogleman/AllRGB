@@ -1,3 +1,4 @@
+from math import hypot
 import random
 import sys
 import wx
@@ -19,11 +20,15 @@ def load_target(path):
     return zip(r, g, b)
 
 def load_indexes():
+    points = [
+        (SIZE / 2, SIZE / 2),
+        # (2915, 1340),
+        # (1115, 1760),
+    ]
     def index_func(index):
         x, y = index % SIZE, index / SIZE
-        x, y = x - SIZE / 2, y - SIZE / 2
-        x, y = x + random.random() * 512 - 256, y + random.random() * 512 - 256
-        return x * x + y * y
+        offset = (random.random() - 0.5) * 1024
+        return min(hypot(x - a, y - b) for a, b in points) + offset
     indexes = range(SIZE * SIZE)
     # random.shuffle(indexes)
     indexes = sorted(indexes, key=index_func)
