@@ -17,7 +17,18 @@ For example, if RGB = (27, 89, 233)...
     
     001, 011, 001, 110, 111, 000, 100, 111 => 1, 3, 1, 6, 7, 0, 4, 7
 
-When encountering a node with a value of zero (meaning no colors are available in that space), visit a different child instead to find as similar of a color as possible.
+When encountering a node with a value of zero (meaning no colors are available in that space), visit a different child instead to find as similar of a color as possible. But don't just pick a random other child, pick one that will minimize error, especially in the green channel. A lookup table is used for this purpose.
+
+    LOOKUP = [
+        [0, 1, 4, 5, 2, 3, 6, 7],
+        [1, 0, 5, 4, 3, 2, 7, 6],
+        [2, 3, 6, 7, 0, 1, 4, 5],
+        [3, 2, 7, 6, 1, 0, 5, 4],
+        [4, 5, 0, 1, 6, 7, 2, 3],
+        [5, 4, 1, 0, 7, 6, 3, 2],
+        [6, 7, 2, 3, 4, 5, 0, 1],
+        [7, 6, 3, 2, 5, 4, 1, 0],
+    ]
 
 If some areas of the image are more important than others, such as a face, let those pixels pick their colors first - give them priority. The pixels in the sample shown below were simply ordered randomly.
 
