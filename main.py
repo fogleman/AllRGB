@@ -27,12 +27,25 @@ def load_indexes():
     ]
     def index_func(index):
         x, y = index % SIZE, index / SIZE
-        offset = (random.random() - 0.5) * 1024
+        offset = (random.random() - 0.5) * 512
         return min(hypot(x - a, y - b) for a, b in points) + offset
     indexes = range(SIZE * SIZE)
-    # random.shuffle(indexes)
-    indexes = sorted(indexes, key=index_func)
+    random.shuffle(indexes)
+    # indexes = sorted(indexes, key=index_func)
     return indexes
+
+def load_indexes_mask(path):
+    result = []
+    mask = load_target(path)
+    colors = sorted(set(mask))
+    groups = dict((x, []) for x in colors)
+    for index, color in enumerate(mask):
+        groups[color].append(index)
+    for color in colors:
+        group = groups[color]
+        random.shuffle(group)
+        result.extend(group)
+    return result
 
 def create_image_data(colors):
     result = [None] * (SIZE * SIZE)
@@ -58,6 +71,7 @@ def main(path):
     target = load_target(path)
     print 'loading indexes'
     indexes = load_indexes()
+    # indexes = load_indexes_mask('mask.png')
     print 'initializing octree'
     tree = octree.Octree()
     print 'picking colors'
