@@ -30,7 +30,7 @@ When encountering a node with a value of zero (meaning no colors are available i
         [7, 6, 3, 2, 5, 4, 1, 0],
     ]
 
-If some areas of the image are more important than others, such as a face, let those pixels pick their colors first - give them priority. The pixels in the sample shown below were simply ordered randomly.
+Optionally, if some areas of the image are more important than others, such as a face, let those pixels pick their colors first - give them priority. This was not done in the sample below. The pixels in the sample were simply ordered randomly.
 
 See http://allrgb.com/ for details on the concept.
 
