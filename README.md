@@ -2,7 +2,7 @@
 
 Efficiently create AllRGB images that target an input image. The input must be 4096x4096px. The output will also be 4096x4096px and will contain all 16,777,216 distinct RGB values once and only once.
 
-An octree is used to spatially represent the RGB colors. The octree is only 9 levels deep from root to leaves. Each node in the octree stores a count for how many colors in its subtree are still available to be used. To find a color in the octree, use a single bit from each of R, G and B to form a 3-bit number representing the next child node to visit. Repeat this process from the most significant to the least significant bits.
+An octree is used to spatially represent the RGB colors. The octree is only 9 levels deep from root to leaf (inclusive). Each node in the octree stores a count for how many colors in its subtree are still available to be used. The octree is stored in a flat array, as it is a complete octree. Children indexes are computed as 8i + 1 + x where i is the current index and x specifies the xth (0 - 7) child. To find a color in the octree, use a single bit from each of R, G and B to form a 3-bit number representing the next child node to visit. Repeat this process from the most significant to the least significant bits.
 
 For example, if RGB = (27, 89, 233)...
 
